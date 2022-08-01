@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>My Wine Company</title>
+    <link rel="stylesheet" href='{% static "results.css" %}'>
+    <link href="https://fonts.googleapis.com/css?family=Baloo+Bhai|Bree+Serif&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <nav id="navbar">
+        <div id="logo">
+            <img src='{% static "Images/logo.jpg"%}' alt="Logo">
+        </div>
+        <ul>
+            <li class="item"><a href="">Home</a></li>
+            
+        </ul>
+    </nav>
+
+    <section id="home">
+        <h1 class="h-primary" >Here Are Your Results</h1>
+        <p style="font-size: 30px; text-emphasis-color: white;">Your Wine Score is: {{answer}}</p>
+        <p style="font-size: 30px; text-emphasis-color: white;">{{wine_quality}}</p>
+        <h2 id="h2" style="color: white; text-emphasis-color: white;">
+            Thanks for choosing us! Enjoy your Wine.
+        </h2>
+    </section>
+    
+    <footer>
+        <div class="center">
+            KAJJUBI WILLIAM @Lextech: No Copyright &copy; My Wine ML internship project.
+        </div>
+    </footer>
+</body>
+
+</html>
