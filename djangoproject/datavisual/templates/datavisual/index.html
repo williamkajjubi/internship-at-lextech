@@ -1,0 +1,164 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Data visualisation website</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="{% static 'datavisual/assets/favicon.ico' %}" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link rel="stylesheet" href="{% static 'datavisual/css/styles.css' %}"  />
+        <script>(function(e,t,n){var r=e.querySelectorAll("html")[0];r.className=r.className.replace(/(^|\s)no-js(\s|$)/,"$1js$2")})(document,window,0);</script>
+    </head>
+    <body>
+        <!-- Responsive navbar-->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container px-5">
+                <a class="navbar-brand" href="#!">Data visualisations site</a>
+                
+            </div>
+        </nav>
+        <!-- Page Content-->
+        <div class="container px-4 px-lg-5">
+            <!-- Heading Row-->
+            <div class="row gx-4 gx-lg-5 align-items-center my-5 ">
+                <h1 class="font-weight-light">WELCOME TO THE DATA VISUALIZATION WEBSITE</h1>
+                <div class="col-lg-5">
+                    
+                    <p>You upload your dataset on the right-hand side area on which to perform visualisations</p>
+                    <p>Then select columns below one as x-xis and the other as y-axis</p>
+                    <p>{{columns| safe }} </p>
+                    <div class="card-body"><h3 class="card bg-secondary text-white m-0">Enter the columns the way they are from the list above since column name is case sensitive</h3></div>
+                    <!-- <a class="btn btn-primary" href="#!">MORE VISUALIZATIONS</a> -->
+                    <form method="POST">
+                        {% csrf_token %}
+                        <input type="text" id="xaxis" name="xaxis" placeholder="X axis" class="form-control" aria-label="Text input with dropdown button">
+                        <input type="text" id="yaxis" name="yaxis" placeholder="Y axis" class="form-control" aria-label="Text input with dropdown button">
+                        <div class="form-group">                    
+                            <div class="col-md-3 col-sm-3 col-xs-12 col-md-offset-3" style="margin-bottom:10px;">
+                                 <button class="btn btn-primary" type="submit"> <span class="glyphicon glyphicon-upload"  style="margin-right:5px;"></span> submit</button>
+                            </div> 
+                        </div>
+                        
+
+                    </form>
+                </div>
+            
+                <div class="col-lg-7 bg-info">
+                    
+                  <form action= "" method="POST" enctype="multipart/form-data" class="form-horizontal"> 
+                    {% csrf_token %}
+                    
+                    <div class="form-group">
+                        <label for="name" class="col-md-3 col-sm-3 col-xs-12 control-label">Upload File from here: </label>
+                        <div class="col-md-8">
+                            {{ form }}
+                            <!-- <input type="file" name="csv_file" id="csv_file" required="True" class="form-control"> -->
+                        </div>                    
+                    </div>
+                    <div class="form-group">                    
+                        <div class="col-md-3 col-sm-3 col-xs-12 col-md-offset-3" style="margin-bottom:10px;">
+                             <button class="btn btn-primary" type="submit"> <span class="glyphicon glyphicon-upload"  style="margin-right:5px;"></span>Upload </button>
+                        </div> 
+                    </div>
+                    </form>
+                   
+                    <div class="header">
+                        {{ success_message }}
+                    </div>
+                    
+                
+                </div>
+                
+                </div>
+               
+            <!-- Call to Action-->
+            <div class="card text-white bg-secondary my-5 py-4 text-center">
+                <div class="card-body"><h1 class="text-white m-0">Below are the data visualisations click the generate button to display the visualization for the dataset you uploaded</h1></div>
+            </div>
+            <!-- Content Row-->
+            <div class="row gx-4 gx-lg-5">
+                <div class="col-md-3 mb-5">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h2 class="card-title">View Dataset </h2>
+                            <p class="card-text">Displays contents  of the whole  dataset</p>
+                        </div>
+                        <div class="card-footer"><a class="btn btn-primary btn-sm" href="{% url 'view description page' %}">Generate</a></div>
+                    </div>
+                </div>
+            
+                <div class="col-md-3 mb-5">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h2 class="card-title">View first five rows</h2>
+                            <p class="card-text">helps to view the first five rows of the dataset </p>
+                        </div>
+                        <div class="card-footer"><a class="btn btn-primary btn-sm" href="{% url 'view first5 page' %}">Generate</a></div>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-5">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h2 class="card-title">View last five rows</h2>
+                            <p class="card-text">helps to view the last five rows of the dataset</p>
+                        </div>
+                        <div class="card-footer"><a class="btn btn-primary btn-sm" href="{% url 'view last5 page' %}">Generate</a></div>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-5">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h2 class="card-title">Model statistics</h2>
+                            <p class="card-text">Shows the statistical description of the data in the dataset</p>
+                        </div>
+                        <div class="card-footer"><a class="btn btn-primary btn-sm" href="{% url 'view modelStats page' %}">Generate</a></div>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-5">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h2 class="card-title">Scatter plot</h2>
+                            <p class="card-text">A scatter plot is a type of plot or mathematical diagram using Cartesian coordinates to display values for typically two variables for a set of data. Scatter plots are used to observe relationships between variables.</p>
+                        </div>
+                        <div class="card-footer"><a class="btn btn-primary btn-sm" href="{% url 'view scatter page' %}">Generate</a></div>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-5">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h2 class="card-title">Histogram</h2>
+                            <p class="card-text">A histogram is a graphical representation that organizes a group of data points into user-specified ranges. Similar in appearance to a bar graph, the histogram condenses a data series into an easily interpreted visual by taking many data points and grouping them into logical ranges or bins.</p>
+                        </div>
+                        <div class="card-footer"><a class="btn btn-primary btn-sm" href="{% url 'view histogram page' %}">Generate</a></div>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-5">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h2 class="card-title">Normal distribution curve</h2>
+                            <p class="card-text">Normal distribution, also known as the Gaussian distribution, is a probability distribution that is symmetric about the mean, showing that data near the mean are more frequent in occurrence than data far from the mean. In graph form, normal distribution will appear as a bell curve.</p>
+                        </div>
+                        <div class="card-footer"><a class="btn btn-primary btn-sm" href="{% url 'view normalDistCurve page' %}">Generate</a></div>
+                    </div>
+                </div>
+            </div>   
+        </div>
+    </div>
+                {% comment %} {{df | safe }}
+                 {%block content %}
+                {%endblock content%} {% endcomment %}
+            
+        <!-- Footer-->
+        <footer class="py-5 bg-dark">
+            <div class="container px-4 px-lg-5"><p class="m-0 text-center text-white">Copyright &copy; KAJJUBI WILLIAM 2022</p></div>
+        </footer>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="{% static 'datavisual/js/scripts.js' %}"></script>
+    </body>
+</html>
